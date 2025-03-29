@@ -3,7 +3,7 @@ import Login from '../pages/Login'
 
 export let enrutador = [
     {
-        path: '/login',
+        path: '/',
         element: <Login />
     },
     {
