@@ -1,15 +1,28 @@
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './Login.css'
-import { Link } from 'react-router-dom'
+import { alertaRedireccion } from '../helpers/funciones'
 function Login() {
+
+  const [getUsuario, setUsuario] = useState("")
+  const [getPassword, setPassword] = useState("")
+  let redireccion = useNavigate()
+
+  function iniciarSesion() {
+    if (getUsuario === "admin" && getPassword === "admin") {
+      alertaRedireccion("Bienvenido " + getUsuario, "/home", redireccion)
+    }
+  }
+
   return (
     <div className="container">
       <input id="signup_toggle" type="checkbox" />
       <form className="form">
         <div className="form_front">
           <div className="form_details">Login</div>
-          <input type="text" className="input" placeholder="Username" />
-          <input type="text" className="input" placeholder="Password" />
-          <Link to="/home" className="btn">Login</Link>
+          <input onChange={(e) => setUsuario(e.target.value)} type="text" className="input" placeholder="Username" />
+          <input onChange={(e) => setPassword(e.target.value)} type="text" className="input" placeholder="Password" />
+          <button type='button' onClick={iniciarSesion} className="btn">Login</button>
           <span className="switch">Don't have an account?
             <label for="signup_toggle" className="signup_tog">
               Sign Up
