@@ -4,12 +4,14 @@ import './Login.css'
 import { alertaRedireccion } from '../helpers/funciones'
 function Login() {
 
+
   const [getUsuario, setUsuario] = useState("")
   const [getPassword, setPassword] = useState("")
   let redireccion = useNavigate()
 
   function iniciarSesion() {
     if (getUsuario === "admin" && getPassword === "admin") {
+      localStorage.setItem("usuario", getUsuario)
       alertaRedireccion("Bienvenido " + getUsuario, "/home", redireccion)
     }
   }
