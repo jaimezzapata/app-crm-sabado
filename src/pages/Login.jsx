@@ -26,9 +26,6 @@ function Login() {
     getUsuarios();
   }, []);
 
-  console.log(usuarios);
-  
-
   function iniciarSesion() {
     if (getUsuario === "admin" && getPassword === "admin") {
       let token = generaToken();
@@ -40,7 +37,27 @@ function Login() {
     }
   }
 
-  function registrarUsuario() {}
+  function registrarUsuario() {
+    let usuario = usuarios.find(
+      (item) => item.usuario == getUsuario || item.email == getEmail
+    );
+    if (usuario) {
+      alertaError("Error", "Usuario ya existe en la base de datos", "error");
+    } else {
+      fetch(apiUsuarios, {
+        method: "POST",
+        body: JSON.stringify({
+          usuario: getUsuario,
+          password: getPassword,
+          nombre: getName,
+          correo: getEmail,
+        }),
+      }).then(() => {
+        console.log("Usuario registrado...");
+        getUsuarios();
+      });
+    }
+  }
 
   return (
     <div className="container">
