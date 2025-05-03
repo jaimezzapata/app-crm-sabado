@@ -27,11 +27,14 @@ function Login() {
   }, []);
 
   function iniciarSesion() {
-    if (getUsuario === "admin" && getPassword === "admin") {
+    let usuario = usuarios.find(
+      (item) => item.usuario == getUsuario && item.password == getPassword
+    );
+    if (usuario) {
       let token = generaToken();
       localStorage.setItem("token", token);
-      localStorage.setItem("usuario", getUsuario);
-      alertaRedireccion("Bienvenido " + getUsuario, "/home", redireccion);
+      localStorage.setItem("usuario", usuario.nombre);
+      alertaRedireccion("Bienvenido " + usuario.nombre, "/home", redireccion);
     } else {
       alertaError("Error", "Usuario y/o contraseña incorrecto", "error");
     }
