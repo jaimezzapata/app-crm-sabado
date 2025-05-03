@@ -1,9 +1,8 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './Login.css'
-import { alertaRedireccion } from '../helpers/funciones'
+import { alertaError, alertaRedireccion, generaToken } from '../helpers/funciones'
 function Login() {
-
 
   const [getUsuario, setUsuario] = useState("")
   const [getPassword, setPassword] = useState("")
@@ -11,8 +10,12 @@ function Login() {
 
   function iniciarSesion() {
     if (getUsuario === "admin" && getPassword === "admin") {
+      let token = generaToken()
+      localStorage.setItem("token", token)
       localStorage.setItem("usuario", getUsuario)
       alertaRedireccion("Bienvenido " + getUsuario, "/home", redireccion)
+    } else {
+      alertaError("Error", "Usuario y/o contraseña incorrecto", "error")
     }
   }
 

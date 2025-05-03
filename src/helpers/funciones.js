@@ -27,6 +27,14 @@ export function alertaRedireccion(mensaje, url, redireccion) {
     });
 }
 
-export function alertaError() {
+export function alertaError(titulo, mensaje, icono) {
+    Swal.fire({
+        title: titulo,
+        text: mensaje,
+        icon: icono
+    });
+}
 
+export function generaToken() {
+    return "token-" + Math.random().toString(36).substring(2, 10) + "-" + Math.random().toString(36).substring(2, 10)
 }
