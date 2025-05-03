@@ -1,23 +1,46 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import './Login.css'
-import { alertaError, alertaRedireccion, generaToken } from '../helpers/funciones'
-function Login() {
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./Login.css";
+import {
+  alertaError,
+  alertaRedireccion,
+  generaToken,
+} from "../helpers/funciones";
+let apiUsuarios = "https://back-json-server-sabado.onrender.com/usuarios/";
 
-  const [getUsuario, setUsuario] = useState("")
-  const [getPassword, setPassword] = useState("")
-  let redireccion = useNavigate()
+function Login() {
+  const [getUsuario, setUsuario] = useState("");
+  const [getPassword, setPassword] = useState("");
+  const [getName, setName] = useState("");
+  const [getEmail, setEmail] = useState("");
+  const [usuarios, setUsuarios] = useState([]);
+  let redireccion = useNavigate();
+
+  function getUsuarios() {
+    fetch(apiUsuarios)
+      .then((response) => response.json())
+      .then((data) => setUsuarios(data));
+  }
+
+  useEffect(() => {
+    getUsuarios();
+  }, []);
+
+  console.log(usuarios);
+  
 
   function iniciarSesion() {
     if (getUsuario === "admin" && getPassword === "admin") {
-      let token = generaToken()
-      localStorage.setItem("token", token)
-      localStorage.setItem("usuario", getUsuario)
-      alertaRedireccion("Bienvenido " + getUsuario, "/home", redireccion)
+      let token = generaToken();
+      localStorage.setItem("token", token);
+      localStorage.setItem("usuario", getUsuario);
+      alertaRedireccion("Bienvenido " + getUsuario, "/home", redireccion);
     } else {
-      alertaError("Error", "Usuario y/o contraseña incorrecto", "error")
+      alertaError("Error", "Usuario y/o contraseña incorrecto", "error");
     }
   }
+
+  function registrarUsuario() {}
 
   return (
     <div className="container">
@@ -25,10 +48,23 @@ function Login() {
       <form className="form">
         <div className="form_front">
           <div className="form_details">Login</div>
-          <input onChange={(e) => setUsuario(e.target.value)} type="text" className="input" placeholder="Username" />
-          <input onChange={(e) => setPassword(e.target.value)} type="text" className="input" placeholder="Password" />
-          <button type='button' onClick={iniciarSesion} className="btn">Login</button>
-          <span className="switch">Don't have an account?
+          <input
+            onChange={(e) => setUsuario(e.target.value)}
+            type="text"
+            className="input"
+            placeholder="Username"
+          />
+          <input
+            onChange={(e) => setPassword(e.target.value)}
+            type="text"
+            className="input"
+            placeholder="Password"
+          />
+          <button type="button" onClick={iniciarSesion} className="btn">
+            Login
+          </button>
+          <span className="switch">
+            Don't have an account?
             <label for="signup_toggle" className="signup_tog">
               Sign Up
             </label>
@@ -36,12 +72,35 @@ function Login() {
         </div>
         <div className="form_back">
           <div className="form_details">SignUp</div>
-          <input type="text" className="input" placeholder="Firstname" />
-          <input type="text" className="input" placeholder="Username" />
-          <input type="text" className="input" placeholder="Password" />
-          <input type="text" className="input" placeholder="Confirm Password" />
-          <button className="btn">Signup</button>
-          <span className="switch">Already have an account?
+          <input
+            onChange={(e) => setName(e.target.value)}
+            type="text"
+            className="input"
+            placeholder="Firstname"
+          />
+          <input
+            onChange={(e) => setUsuario(e.target.value)}
+            type="text"
+            className="input"
+            placeholder="Username"
+          />
+          <input
+            onChange={(e) => setPassword(e.target.value)}
+            type="text"
+            className="input"
+            placeholder="Password"
+          />
+          <input
+            onChange={(e) => setEmail(e.target.value)}
+            type="text"
+            className="input"
+            placeholder="Email"
+          />
+          <button type="button" onClick={registrarUsuario} className="btn">
+            Signup
+          </button>
+          <span className="switch">
+            Already have an account?
             <label for="signup_toggle" className="signup_tog">
               Sign In
             </label>
@@ -49,7 +108,7 @@ function Login() {
         </div>
       </form>
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;
