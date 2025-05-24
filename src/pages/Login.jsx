@@ -33,7 +33,7 @@ function Login() {
     if (usuario) {
       let token = generaToken();
       localStorage.setItem("token", token);
-      localStorage.setItem("usuario", usuario.nombre);
+      localStorage.setItem("usuario", JSON.stringify(usuario));
       alertaRedireccion("Bienvenido " + usuario.nombre, "/home", redireccion);
     } else {
       alertaError("Error", "Usuario y/o contraseña incorrecto", "error");

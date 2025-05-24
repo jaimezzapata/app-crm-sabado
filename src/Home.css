@@ -18,7 +18,7 @@
   align-items: center;
   flex-direction: column;
   padding: 10px;
-  background-color: #F28B30;
+  background-color: #f28b30;
 }
 
 .aplicacion__menu-lateral-logo {
@@ -65,11 +65,10 @@
   background: none;
   border: none;
   font-size: 20px;
-
 }
 
 .aplicacion__menu-lateral-navegacion-item::after {
-  content: '';
+  content: "";
   width: 100%;
   transform: scale(0);
   position: absolute;
@@ -82,7 +81,6 @@
 
 .aplicacion__menu-lateral-navegacion-item:hover::after {
   transform: scale(1);
-
 }
 
 .aplicacion__contenido {
@@ -152,7 +150,7 @@
   padding: 20px;
 }
 
-.aplicacion__informacion:hover~.aplicacion__contenido-fondo {
+.aplicacion__informacion:hover ~ .aplicacion__contenido-fondo {
   background-color: rgba(255, 255, 255, 0.8);
 }
 
@@ -188,13 +186,12 @@
   height: 100%;
   width: 100%;
   transform: scale(0);
-  content: '';
+  content: "";
   top: 0;
   left: 0;
   border-radius: 8px;
   transition: ease-in-out 0.3s;
 }
-
 
 .card:hover::after,
 .card:hover::before {
@@ -204,7 +201,7 @@
 
 .card:hover::after {
   transform: scale(0.95);
-  background-color: #F28B30;
+  background-color: #f28b30;
   transition: ease-in-out 0.4s;
   z-index: -1;
 }
@@ -262,7 +259,6 @@
   padding: 10px;
 }
 
-
 .card__buttons {
   display: flex;
   justify-content: center;
@@ -296,4 +292,20 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+.envios {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+}
+.envios .form_envio {
+  display: flex;
+  flex-direction: column;
+}
+.form_envio .form_front {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
